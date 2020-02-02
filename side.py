@@ -40,8 +40,19 @@ class side():
     
         # Decide how many incoming cars to queue in each lane
         # TODO: Make this draw stochastically from arrival_distribution
-        for lane in self.lanes:
-            lane.queue += cars_incoming // len(self.lanes)
+
+        #new array to stochastically alter arrival distribution
+        changed = self.arrival_distribution
+        if len(self.arrival_distribution) == 3:
+            changed[0] = np.random.normal(self.arrival_distribution[0], .05)
+            changed[1] = np.random.normal(self.arrival_distribution[1], .05)
+            changed[2] = 1 - changed[0] - changed[1]
+        else:
+            changed[0] = np.random.normal(self.arrival_distribution[0], .1)
+            changed[1] = 1 - changed[0]
+
+        for num, lane in enumerate(self.lanes):
+            lane.queue += int(cars_incoming * changed[num])
         
         print("{} cars arrived at {}. Queue is now {}".format(cars_incoming, self.name, self.queue_to_string()))
 

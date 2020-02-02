@@ -9,12 +9,12 @@ s = sched.scheduler(time.time, time.sleep)
 #####################################################################
 # NORTH AVE / TECHWOOD PARAMETERS 
 #####################################################################
-NAVE_TECHWOOD_N_DEP_DISTS = [[1, 0, 0], [0, .5, .5]]
+NAVE_TECHWOOD_N_DEP_DISTS = [[1, 0, 0], [0, .5, 1]]
 NAVE_TECHWOOD_N_LANES = [lane(NAVE_TECHWOOD_N_DEP_DISTS[0]), lane(NAVE_TECHWOOD_N_DEP_DISTS[1])]
 NAVE_TECHWOOD_N_ARR_DIST = [.5, .5]
 NAVE_TECHWOOD_N = side(s, "North/Techwood N", NAVE_TECHWOOD_N_LANES, NAVE_TECHWOOD_N_ARR_DIST, 0)
 
-NAVE_TECHWOOD_E_DEP_DISTS = [[1, 0, 0], [0, 1, 0], [0, .5, .5]]
+NAVE_TECHWOOD_E_DEP_DISTS = [[1, 0, 0], [0, 1, 0], [0, .5, 1]]
 NAVE_TECHWOOD_E_LANES = [lane(NAVE_TECHWOOD_E_DEP_DISTS[0]), lane(NAVE_TECHWOOD_E_DEP_DISTS[1]), lane(NAVE_TECHWOOD_E_DEP_DISTS[2])]
 NAVE_TECHWOOD_E_ARR_DIST = [.33, .33, .33]
 NAVE_TECHWOOD_E = side(s, "North/Techwood E", NAVE_TECHWOOD_E_LANES, NAVE_TECHWOOD_E_ARR_DIST, 2)
@@ -24,7 +24,7 @@ NAVE_TECHWOOD_S_LANES = [lane(NAVE_TECHWOOD_S_DEP_DISTS[0]), lane(NAVE_TECHWOOD_
 NAVE_TECHWOOD_S_ARR_DIST = [.33, .33, .33]
 NAVE_TECHWOOD_S = side(s, "North/Techwood S", NAVE_TECHWOOD_S_LANES, NAVE_TECHWOOD_S_ARR_DIST, 1)
 
-NAVE_TECHWOOD_W_DEP_DISTS = [[1, 0, 0], [0, 1, 0], [0, .5, .5]]
+NAVE_TECHWOOD_W_DEP_DISTS = [[1, 0, 0], [0, 1, 0], [0, .5, 1]]
 NAVE_TECHWOOD_W_LANES = [lane(NAVE_TECHWOOD_W_DEP_DISTS[0]), lane(NAVE_TECHWOOD_W_DEP_DISTS[1]), lane(NAVE_TECHWOOD_W_DEP_DISTS[2])]
 NAVE_TECHWOOD_W_ARR_DIST = [.33, .33, .33]
 NAVE_TECHWOOD_W = side(s, "North/Techwood W", NAVE_TECHWOOD_W_LANES, NAVE_TECHWOOD_W_ARR_DIST, 3)
@@ -44,12 +44,12 @@ NAVE_TECHWOOD_PHASES = [phase([NAVE_TECHWOOD_S],[[0,1,2]],30), #techwood South a
 #####################################################################    
 # NORTH AVE / LUCKIE ST PARAMETERS 
 #####################################################################    
-NAVE_LUCKIE_N_DEP_DISTS = [[1, 0, 0], [0, .5, .5]]
+NAVE_LUCKIE_N_DEP_DISTS = [[1, 0, 0], [0, .5, 1]]
 NAVE_LUCKIE_N_LANES = [lane(NAVE_LUCKIE_N_DEP_DISTS[0]), lane(NAVE_LUCKIE_N_DEP_DISTS[1])]
 NAVE_LUCKIE_N_ARR_DIST = [.5, .5]
 NAVE_LUCKIE_N = side(s, "North/Luckie N", NAVE_LUCKIE_N_LANES, NAVE_LUCKIE_N_ARR_DIST, 0)
 
-NAVE_LUCKIE_E_DEP_DISTS = [[.5, .5, 0], [0, .5, .5]]
+NAVE_LUCKIE_E_DEP_DISTS = [[.5, .5, 0], [0, .5, 1]]
 NAVE_LUCKIE_E_LANES = [lane(NAVE_LUCKIE_E_DEP_DISTS[0]), lane(NAVE_LUCKIE_E_DEP_DISTS[1])]
 NAVE_LUCKIE_E_ARR_DIST = [.5, .5]
 NAVE_LUCKIE_E = side(s, "North/Luckie E", NAVE_LUCKIE_E_LANES, NAVE_LUCKIE_E_ARR_DIST, 1)
@@ -59,7 +59,7 @@ NAVE_LUCKIE_S_LANES = [lane(NAVE_LUCKIE_S_DEP_DISTS[0]), lane(NAVE_LUCKIE_S_DEP_
 NAVE_LUCKIE_S_ARR_DIST = [.33, .33, .33]
 NAVE_LUCKIE_S = side(s, "North/Luckie S", NAVE_LUCKIE_S_LANES, NAVE_LUCKIE_S_ARR_DIST, 2)
 
-NAVE_LUCKIE_W_DEP_DISTS = [[1, 0, 0], [0, 1, 0], [0, .5, .5]]
+NAVE_LUCKIE_W_DEP_DISTS = [[1, 0, 0], [0, 1, 0], [0, .5, 1]]
 NAVE_LUCKIE_W_LANES = [lane(NAVE_LUCKIE_W_DEP_DISTS[0]), lane(NAVE_LUCKIE_W_DEP_DISTS[1]), lane(NAVE_LUCKIE_W_DEP_DISTS[2])]
 NAVE_LUCKIE_W_ARR_DIST = [.33, .33, .33]
 NAVE_LUCKIE_W = side(s, "North/Luckie W", NAVE_LUCKIE_W_LANES, NAVE_LUCKIE_W_ARR_DIST, 3)
@@ -77,7 +77,7 @@ NAVE_LUCKIE_PHASES = [phase([NAVE_LUCKIE_S],[[0,1,2]],30), #luckie green and arr
 #####################################################################    
 # Off-Ramp PARAMETERS 
 #####################################################################
-OFFRAMP_249_DEP_DISTS = [[1,0,0],[0.5,0,0.5]]
+OFFRAMP_249_DEP_DISTS = [[1,0,0],[0.5,0,1]]
 OFFRAMP_249_LANES = [lane(OFFRAMP_249_DEP_DISTS[0]), lane(OFFRAMP_249_DEP_DISTS[1])]
 OFFRAMP_249_ARR_DIST = [0.5,0.5]
 OFFRAMP_249 = side(s, "OFFRAMP 249", OFFRAMP_249_LANES, OFFRAMP_249_ARR_DIST, 0)

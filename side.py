@@ -1,3 +1,5 @@
+avg_travel_delay = [10, 10, 10]
+
 #Represents one side of an intersection
 class side():
 
@@ -25,11 +27,11 @@ class side():
         
         # For each departure direction, if the destination exists in our simulation, schedule the respective arrival event     
         if self.destinations[0] and l > 0:
-            self.sched.enter(avg_travel_delay[0], 1, self.destinations[0].arrive, [l])           
+            self.sched.enter(avg_travel_delay[0], 1, self.destinations[0].arrival, [l])           
         if self.destinations[1] and s > 0:
-            self.sched.enter(avg_travel_delay[1], 1, self.destinations[1].arrive, [s])
+            self.sched.enter(avg_travel_delay[1], 1, self.destinations[1].arrival, [s])
         if self.destinations[2] and r > 0:
-            self.sched.enter(avg_travel_delay[2], 1, self.destinations[2].arrive, [r])
+            self.sched.enter(avg_travel_delay[2], 1, self.destinations[2].arrival, [r])
 
     def arrival(self, cars_incoming):
     

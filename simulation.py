@@ -72,7 +72,30 @@ NAVE_LUCKIE_PHASES = [phase([NAVE_LUCKIE_S],[[0,1,2]],30), #luckie green and arr
     #nave west green and arrow
     phase([NAVE_LUCKIE_W],[[0,1,2]],30),
     #nave west green and nave east green
-    phase([NAVE_LUCKIE_W,NAVE_LUCKIE_E],[[1,2],[1]],30)]    
+    phase([NAVE_LUCKIE_W,NAVE_LUCKIE_E],[[1,2],[1]],30)]
+
+#####################################################################    
+# Off-Ramp PARAMETERS 
+#####################################################################
+OFFRAMP_249_DEP_DISTS = [[1,0,0],[0.5,0,0.5]]
+OFFRAMP_249_LANES = [lane(OFFRAMP_249_DEP_DISTS[0]), lane(OFFRAMP_249_DEP_DISTS[1])]
+OFFRAMP_249_ARR_DIST = [0.5,0.5]
+OFFRAMP_249 = side(s, "OFFRAMP 249", OFFRAMP_249_LANES, OFFRAMP_249_ARR_DIST)
+
+OFFRAMP_WEST_DEP_DIST=[[0,1,0], [0,1,0]]
+OFFRAMP_WEST_LANES = [lane(OFFRAMP_WEST_DEP_DIST[0]), lane(OFFRAMP_WEST_DEP_DIST[1])]
+OFFRAMP_WEST_ARR_DIST = [0.5,0.5]
+OFFRAMP_WEST = side(s, "Offramp West", OFFRAMP_WEST_LANES, OFFRAMP_WEST_ARR_DIST)
+
+OFFRAMP_EAST_DEP_DIST=[[0,1,0], [0,1,0]]
+OFFRAMP_EAST_LANES = [lane(OFFRAMP_EAST_DEP_DIST[0]), lane(OFFRAMP_EAST_DEP_DIST[1])]
+OFFRAMP_EAST_ARR_DIST = [0.5,0.5]
+OFFRAMP_EAST = side(s, "Offramp East", OFFRAMP_EAST_LANES, OFFRAMP_EAST_ARR_DIST)
+
+OFFRAMP_PHASES = [phase([OFFRAMP_WEST, OFFRAMP_EAST],[[0,1], [0,1]], 30), #Nave e and Nave w green light
+                  #off-ramp green lights
+                  phase([OFFRAMP_249], [[0,1]],30)]
+
 
         
 class Simulation():
@@ -80,23 +103,31 @@ class Simulation():
     def __init__(self):
         self.nave_luckie = nave_luckie
         self.nave_techwood = nave_techwood
+        self.offramp = offramp
         self.s = sched.scheduler(time.time, time.sleep)
         s.enter(60, 1, lambda: nave_luckie.cycle(s))
         s.enter(60, 1, lambda: nave_techwood.cycle(s))
+        s.enter(60, 1, lambda: offramp.cycles(s))
         s.run()
         
 if __name__ == '__main__':
     
     nave_luckie = intersection(s, "North/Luckie", [NAVE_LUCKIE_N, NAVE_LUCKIE_E, NAVE_LUCKIE_S, NAVE_LUCKIE_W], NAVE_LUCKIE_PHASES)
     nave_techwood = intersection(s, "North/Techwood", [NAVE_TECHWOOD_N, NAVE_TECHWOOD_E, NAVE_TECHWOOD_S, NAVE_TECHWOOD_W], NAVE_TECHWOOD_PHASES)
+    offramp = intersection(s, "Offramp", [OFFRAMP_249, OFFRAMP_EAST, OFFRAMP_WEST], OFFRAMP_PHASES)
     
     nave_luckie.sides[0].set_dests([nave_techwood.sides[3], None, None])
     nave_luckie.sides[2].set_dests([None, None, nave_techwood.sides[3]])
     nave_luckie.sides[3].set_dests([None, nave_techwood.sides[3], None])
 
-    nave_techwood.sides[0].set_dests([None, None, nave_luckie.sides[1]])
+    nave_techwood.sides[0].set_dests([offramp.sides[2], None, nave_luckie.sides[1]])
     nave_techwood.sides[1].set_dests([None, nave_luckie.sides[1], None])
-    nave_techwood.sides[2].set_dests([nave_luckie.sides[1], None, None])
+    nave_techwood.sides[2].set_dests([nave_luckie.sides[1], None, offramp.sides[2]])
+    nave_techwood.sides[3].set_dests([None,offramp.sides[2],None])
+    
+    offramp.sides[0].set_dests([None, None, nave_techwood.sides[1]])
+    offramp.sides[1].set_dests([None, nave_techwood.sides[1], None])
+    offramp.sides[2].set_dests([None, None, None])
     
     for side in nave_luckie.sides:
         s.enter(0, 1, side.arrival, [100])
@@ -104,4 +135,7 @@ if __name__ == '__main__':
     for side in nave_techwood.sides:
         s.enter(1, 1, side.arrival, [100])
     s.enter(10, 1, lambda: nave_techwood.cycle())
+    for side in offramp.sides:
+        s.enter(0,1,side.arrival,[100])
+    s.enter(15, 1, lambda: offramp.cycle())
     s.run()

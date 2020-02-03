@@ -58,32 +58,32 @@ class side():
 
     def nave_luckie_dist(self):
         if self.counter == 0:
-            return int(np.random.normal(451, 25))
+            return int(np.random.normal(8, 1))
         if self.counter == 1:
-            return int(np.random.normal(299, 25))
+            return int(np.random.normal(5, 1))
         if self.counter == 2:
-            return int(np.random.normal(953, 50))
+            return int(np.random.normal(16, 2))
         if self.counter == 3:
-            return int(np.random.normal(800, 50))
+            return int(np.random.normal(13, 2))
 
 
     def nave_techwood_dist(self):
         if self.counter == 0:
-            return int(np.random.normal(317, 25))
+            return int(np.random.normal(5, 1))
         if self.counter == 1:
-            return int(np.random.normal(953, 25))
+            return int(np.random.normal(16, 2))
         if self.counter == 2:
-            return int(np.random.normal(108, 50))
+            return int(np.random.normal(2, 1))
         if self.counter == 3:
-            return int(np.random.normal(800, 50))
+            return int(np.random.normal(13, 2))
 
     def offramp_dist(self):
         if self.counter == 0:
-            return int(np.random.normal(344, 25))
+            return int(np.random.normal(6, 1))
         if self.counter == 1:
-            return int(np.random.normal(800, 50))
+            return int(np.random.normal(13, 2))
         if self.counter == 2:
-            return int(np.random.normal(953, 50))
+            return int(np.random.normal(16, 2))
         
     def set_dests(self, destinations):
         self.destinations = destinations

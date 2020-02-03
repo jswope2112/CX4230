@@ -55,7 +55,6 @@ class lane():
         # generate a uniform random variable to determine which way the car is going
         # TODO: base this off real data from the intersection (departure_distribution)
         random_num = np.random.uniform()
-        print(self.departure_distribution)
 
         for idx, val in enumerate(self.departure_distribution):
             if random_num < val:

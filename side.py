@@ -3,6 +3,10 @@ import TravelTime as tt
 
 avg_travel_delay = [10, 10, 10]
 
+nave_luckie_output = {"North/Luckie S": 0, "North/Luckie N": 0, "North/Luckie E": 0, "North/Luckie W": 0}
+nave_techwood_output = {"North/Techwood N": 0, "North/Techwood E": 0, "North/Techwood S": 0, "North/Techwood W": 0}
+offramp_output = {"Offramp West": 0, "Offramp East": 0, "Offramp 249": 0}
+
 #Represents one side of an intersection
 class side():
 
@@ -28,6 +32,16 @@ class side():
             r += c
 
         print("{} cars departed from {} ({} l / {} s / {} r). Queue is now {}".format(l+s+r, self.name, l, s, r, self.queue_to_string()))
+        if self.name[0] == 'O':
+            offramp_output[self.name] = offramp_output[self.name] + l + s + r
+            print("output of {} is {}".format(self.name[:7], sum(offramp_output.values())))
+        elif self.name[6] == 'T':
+            nave_techwood_output[self.name] = nave_techwood_output[self.name] + l + s + r
+            print("output of {} is {}".format(self.name[:14], sum(nave_techwood_output.values())))
+        else:
+            nave_luckie_output[self.name] = nave_luckie_output[self.name] + l + s + r
+            print("output of {} is {}".format(self.name[:12], sum(nave_luckie_output.values())))
+        
         
         # For each departure direction, if the destination exists in our simulation, schedule the respective arrival event     
         if self.destinations[0] and l > 0:
@@ -62,6 +76,7 @@ class side():
             lane.queue += int(cars_incoming * changed[num])
         
         print("{} cars arrived at {}. Queue is now {}".format(cars_incoming, self.name, self.queue_to_string()))
+
 
     def nave_luckie_dist(self):
         if self.counter == 0:

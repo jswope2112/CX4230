@@ -7,9 +7,10 @@ avg_travel_delay = 0.75
 
 class lane():
 
-    def __init__(self, departure_distribution):
+    def __init__(self, departure_distribution, auto_vehicles = False):
         self.queue = 0
         self.departure_distribution = departure_distribution
+        self.auto_vehicles = auto_vehicles
         
     def depart(self, time_allowed):
     
@@ -21,7 +22,11 @@ class lane():
                 return l, s, r
             
             #we assume average  reaction delay as a normal random variable
-            reaction_delay = np.random.normal(avg_reaction_delay, std_reaction_delay)
+            #if there are autonomous vehicles, there are no reaction delays
+            if (self.auto_vehicles):
+                reaction_delay = 0
+            else:
+                reaction_delay = np.random.normal(avg_reaction_delay, std_reaction_delay)
             decision = self.get_car_decision()
             
             #our calculation of travel_delay varies per lane

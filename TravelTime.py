@@ -35,7 +35,7 @@ class TravelTime():
         if distance == 0:
             return "Error"
         
-        base_travel_time = average_travel_time(distance, self.adjustedSpeedLimit)
+        base_travel_time = average_travel_time(distance, self.adjustedSpeedLimit, self.auto_vehicles)
         
         #If there are no autonomous vehicles, we do not add extra delay due to more vehicles
         if (not self.auto_vehicles):
@@ -50,7 +50,7 @@ class TravelTime():
 #d = vt + 0.5*a*t^2 (kinematic equation)
 #Deceleration + reaction times source : https://nacto.org/docs/usdg/vehicle_stopping_distance_and_time_upenn.pdf
 #Acceleration source : https://hypertextbook.com/facts/2001/MeredithBarricella.shtml
-def average_travel_time(distance, mph_speed):
+def average_travel_time(distance, mph_speed, auto_vehicles):
     assumed_acceleration_m_s = 3.5
     fps_speed = 1.467 * mph_speed
     assumed_acceleration_fps = 3.28 * assumed_acceleration_m_s
@@ -60,7 +60,9 @@ def average_travel_time(distance, mph_speed):
     stopping_time = fps_speed/assumed_deceleration_fps
     stopping_distance = fps_speed * stopping_time - 0.5 * assumed_deceleration_fps * stopping_time ** 2
     
-    acceleration_time = fps_speed/assumed_acceleration_fps + assumed_reaction_recognition_time
+    acceleration_time = fps_speed/assumed_acceleration_fps
+    if (auto_vehicles):
+        acceleration_time += assumed_reaction_recognition_time
     acceleration_distance = 0.5 * assumed_acceleration_fps * acceleration_time ** 2
     
     rest_of_distance = distance - stopping_distance - acceleration_distance
@@ -69,7 +71,7 @@ def average_travel_time(distance, mph_speed):
     #there was not enough time to accelerate to full speed, so we recursively
     #call this algorithm until we determine a new "top" speed works
     if (rest_of_distance < 0):
-        return average_travel_time(distance, mph_speed - 1)
+        return average_travel_time(distance, mph_speed - 1, auto_vehicles)
     
     rest_of_distance_time = rest_of_distance / fps_speed
     

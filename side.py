@@ -10,7 +10,7 @@ offramp_output = {"Offramp West": 0, "Offramp East": 0, "Offramp 249": 0}
 #Represents one side of an intersection
 class side():
 
-    def __init__(self, sched, name, lanes, arrival_distribution, counter):
+    def __init__(self, sched, name, lanes, arrival_distribution, counter, auto_vehicles = False):
         self.sched = sched
         self.name = name
         #self.intersection = intersection # Points to the intersection this side is a part of (CURRENTLY NO LONGER NEEDED)
@@ -18,6 +18,7 @@ class side():
         self.arrival_distribution = arrival_distribution
         self.destinations = [None, None, None]  # Points to the destination Side after going left, straight, or right, respectively
         self.counter = counter
+        self.auto_vehicles = auto_vehicles
         
     def depart(self, time, lanes):
     
@@ -45,15 +46,15 @@ class side():
         
         # For each departure direction, if the destination exists in our simulation, schedule the respective arrival event     
         if self.destinations[0] and l > 0:
-            travel_time_calculator = tt.TravelTime()
+            travel_time_calculator = tt.TravelTime(self.auto_vehicles)
             travel_time = travel_time_calculator.calculateTravelTime(self.name, self.destinations[0].name, l)
             self.sched.enter(travel_time, 1, self.destinations[0].arrival, [l])      
         if self.destinations[1] and s > 0:
-            travel_time_calculator = tt.TravelTime()
+            travel_time_calculator = tt.TravelTime(self.auto_vehicles)
             travel_time = travel_time_calculator.calculateTravelTime(self.name, self.destinations[1].name, s)
             self.sched.enter(travel_time, 1, self.destinations[1].arrival, [s])
         if self.destinations[2] and r > 0:
-            travel_time_calculator = tt.TravelTime()
+            travel_time_calculator = tt.TravelTime(self.auto_vehicles)
             travel_time = travel_time_calculator.calculateTravelTime(self.name, self.destinations[2].name, r)
             self.sched.enter(travel_time, 1, self.destinations[2].arrival, [r])
 

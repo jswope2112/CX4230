@@ -1,5 +1,8 @@
+import removal
+
 class nave_techwood:
 
+    TIMERS = [10, 30, 10, 10, 30, 10]
 	# 2d arrays for each road
 
 	# 0 = straight and right
@@ -25,6 +28,56 @@ class nave_techwood:
 	counter = 0
 
 	def cycle:
+	    #techwood South arrow and green
+	    techwood_south[0] -= removal(techwood_south[0], 1, TIMERS[0])
+	    techwood_south[1] -= removal(techwood_south[1], 1, TIMERS[0])
+	    techwood_south[2] -= removal(techwood_south[2], 1, TIMERS[0])
+	    techwood_north[0] += car_inflows(techwood_north[0], 1, 36, TIMERS[0])
+	    techwood_north[1] += car_inflows(techwood_north[1], 1, 36, TIMERS[0])
+	    if techwood_north[0] + techwood_north[1] > 72:
+	        time.sleep(TIMERS[0])
+	    else:
+	        time.sleep(TIMERS[0])
+
+        #techwood S and techwood N green
+        techwood_south[0] -= removal(techwood_south[0], 1, TIMERS[1])
+        techwood_south[1] -= removal(techwood_south[1], 1, TIMERS[1])
+        techwood_north[0] -= removal(techwood_north[0], 1, TIMERS[1])
+
+        time.sleep(TIMERS[1])
+
+        #techwood N green and arrow
+        techwood_north[0] -= removal(techwood_north[0], 1, TIMERS[2])
+        techwood_north[1] -= removal(techwood_north[1], 1, TIMERS[2])
+
+        time.sleep(TIMERS[2])
+
+        #Nave W green and arrow
+        nave_west[0] -= removal(nave_west[0], 1, TIMERS[3])
+        nave_west[1] -= removal(nave_west[1], 1, TIMERS[3])
+        nave_west[2] -= removal(nave_west[2], 1, TIMERS[3])
+
+        time.sleep(TIMERS[3])
+
+        #Nave W and Nave E green
+        nave_east[0] -= removal(nave_east[0], 1, TIMERS[4])
+        nave_east[1] -= removal(nave_east[1], 1, TIMERS[4])
+        nave_west[0] -= removal(nave_west[0], 1, TIMERS[4])
+        nave_west[1] -= removal(nave_west[1], 1, TIMERS[4])
+
+        time.sleep(TIMERS[4])
+
+        #Nave E green and arrow
+        nave_east[0] -= removal(nave_east[0], 1, TIMERS[5])
+        nave_east[1] -= removal(nave_east[1], 1, TIMERS[5])
+        nave_east[2] -= removal(nave_east[2], 1, TIMERS[5])
+        techwood_south[0] += car_inflows(techwood_south[0], 1, 38, TIMERS[5])
+        techwood_south[1] += car_inflows(techwood_south[1], 1, 38, TIMERS[5])
+        techwood_south[2] += car_inflows(techwwod_south[2], 1, 38, TIMERS[5])
+        if techwood_south[0] + techwood_south[1] + techwood_south[2] > 114:
+            time.sleep(TIMERS[5])
+        else:
+            time.sleep(TIMERS[5])
 
 		#techwood South arrow and green
 		if counter == 0:

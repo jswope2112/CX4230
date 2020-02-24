@@ -1,4 +1,5 @@
 import numpy as np
+import math
 import TravelTime as tt
 
 avg_travel_delay = [10, 10, 10]
@@ -19,9 +20,10 @@ class side():
         self.destinations = [None, None, None]  # Points to the destination Side after going left, straight, or right, respectively
         self.counter = counter
         self.auto_vehicles = auto_vehicles
+        self.on_boundary = True
         
     def depart(self, time, lanes):
-    
+            
         # Number of cars that end up turning in each direction
         l, s, r = 0, 0, 0
         
@@ -44,7 +46,7 @@ class side():
             print("output of {} is {}".format(self.name[:12], sum(nave_luckie_output.values())))
         
         
-        # For each departure direction, if the destination exists in our simulation, schedule the respective arrival event     
+        # For each departure direction, if the destination exists in our simulation, schedule the respective arrival event  
         if self.destinations[0] and l > 0:
             travel_time_calculator = tt.TravelTime(self.auto_vehicles)
             travel_time = travel_time_calculator.calculateTravelTime(self.name, self.destinations[0].name, l)
@@ -64,19 +66,23 @@ class side():
         # TODO: Make this draw stochastically from arrival_distribution
 
         #new array to stochastically alter arrival distribution
-        changed = self.arrival_distribution
-        if len(self.arrival_distribution) == 3:
-            changed[0] = np.random.normal(self.arrival_distribution[0], .05)
-            changed[1] = np.random.normal(self.arrival_distribution[1], .05)
+        changed = [0,0,0] # setting to self.arrival_distribution creates a shallow copy and changes it permanently
+        #print("{} dist[2] BEFORE: {}".format(self.name, self.arrival_distribution[2]))
+        if len(self.arrival_distribution[2]) == 3:
+            changed[0] = np.random.normal(self.arrival_distribution[2][0], .05)
+            changed[1] = np.random.normal(self.arrival_distribution[2][1], .05)
             changed[2] = 1 - changed[0] - changed[1]
         else:
-            changed[0] = np.random.normal(self.arrival_distribution[0], .1)
+            changed[0] = np.random.normal(self.arrival_distribution[2][0], .1)
             changed[1] = 1 - changed[0]
 
-        for num, lane in enumerate(self.lanes):
-            lane.queue += int(cars_incoming * changed[num])
+        #print("{} dist[2] AFTER: {}".format(self.name, self.arrival_distribution[2]))
         
-        print("{} cars arrived at {}. Queue is now {}".format(cars_incoming, self.name, self.queue_to_string()))
+        total = 0
+        for num, lane in enumerate(self.lanes):
+            lane.queue += math.ceil(cars_incoming * changed[num])
+            total += math.ceil(cars_incoming * changed[num])
+        print("{} cars arrived at {}. Queue is now {}".format(total, self.name, self.queue_to_string()))
 
 
     def nave_luckie_dist(self):

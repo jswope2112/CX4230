@@ -1,4 +1,5 @@
 import sched, time
+import numpy as np
 from lane import lane
 from side import side
 from intersection import intersection
@@ -13,22 +14,22 @@ AUTO_VEHICLES = False
 #####################################################################
 NAVE_TECHWOOD_N_DEP_DISTS = [[1, 0, 0], [0, .5, 1]]
 NAVE_TECHWOOD_N_LANES = [lane(NAVE_TECHWOOD_N_DEP_DISTS[0],AUTO_VEHICLES), lane(NAVE_TECHWOOD_N_DEP_DISTS[1],AUTO_VEHICLES)]
-NAVE_TECHWOOD_N_ARR_DIST = [.5, .5]
+NAVE_TECHWOOD_N_ARR_DIST = [5, 1, [.5, .5]]
 NAVE_TECHWOOD_N = side(s, "North/Techwood N", NAVE_TECHWOOD_N_LANES, NAVE_TECHWOOD_N_ARR_DIST, 0,AUTO_VEHICLES)
 
 NAVE_TECHWOOD_E_DEP_DISTS = [[1, 0, 0], [0, 1, 0], [0, .5, 1]]
 NAVE_TECHWOOD_E_LANES = [lane(NAVE_TECHWOOD_E_DEP_DISTS[0],AUTO_VEHICLES), lane(NAVE_TECHWOOD_E_DEP_DISTS[1],AUTO_VEHICLES), lane(NAVE_TECHWOOD_E_DEP_DISTS[2],AUTO_VEHICLES)]
-NAVE_TECHWOOD_E_ARR_DIST = [.33, .33, .33]
+NAVE_TECHWOOD_E_ARR_DIST = [16, 2, [.33, .33, .33]]
 NAVE_TECHWOOD_E = side(s, "North/Techwood E", NAVE_TECHWOOD_E_LANES, NAVE_TECHWOOD_E_ARR_DIST, 2)
 
 NAVE_TECHWOOD_S_DEP_DISTS = [[1, 0, 0], [0, 1, 0], [0, 0, 1]]
 NAVE_TECHWOOD_S_LANES = [lane(NAVE_TECHWOOD_S_DEP_DISTS[0], AUTO_VEHICLES), lane(NAVE_TECHWOOD_S_DEP_DISTS[1],AUTO_VEHICLES), lane(NAVE_TECHWOOD_S_DEP_DISTS[2],AUTO_VEHICLES)]
-NAVE_TECHWOOD_S_ARR_DIST = [.33, .33, .33]
+NAVE_TECHWOOD_S_ARR_DIST = [2, 1, [.33, .33, .33]]
 NAVE_TECHWOOD_S = side(s, "North/Techwood S", NAVE_TECHWOOD_S_LANES, NAVE_TECHWOOD_S_ARR_DIST, 1,AUTO_VEHICLES)
 
 NAVE_TECHWOOD_W_DEP_DISTS = [[1, 0, 0], [0, 1, 0], [0, .5, 1]]
 NAVE_TECHWOOD_W_LANES = [lane(NAVE_TECHWOOD_W_DEP_DISTS[0],AUTO_VEHICLES), lane(NAVE_TECHWOOD_W_DEP_DISTS[1],AUTO_VEHICLES), lane(NAVE_TECHWOOD_W_DEP_DISTS[2],AUTO_VEHICLES)]
-NAVE_TECHWOOD_W_ARR_DIST = [.33, .33, .33]
+NAVE_TECHWOOD_W_ARR_DIST = [13, 2, [.33, .33, .33]]
 NAVE_TECHWOOD_W = side(s, "North/Techwood W", NAVE_TECHWOOD_W_LANES, NAVE_TECHWOOD_W_ARR_DIST, 3,AUTO_VEHICLES)
 
 NAVE_TECHWOOD_PHASES = [phase([NAVE_TECHWOOD_S],[[0,1,2]],30), #techwood South arrow and green
@@ -48,22 +49,22 @@ NAVE_TECHWOOD_PHASES = [phase([NAVE_TECHWOOD_S],[[0,1,2]],30), #techwood South a
 #####################################################################    
 NAVE_LUCKIE_N_DEP_DISTS = [[1, 0, 0], [0, .5, 1]]
 NAVE_LUCKIE_N_LANES = [lane(NAVE_LUCKIE_N_DEP_DISTS[0],AUTO_VEHICLES), lane(NAVE_LUCKIE_N_DEP_DISTS[1],AUTO_VEHICLES)]
-NAVE_LUCKIE_N_ARR_DIST = [.5, .5]
+NAVE_LUCKIE_N_ARR_DIST = [8, 1, [.5, .5]]
 NAVE_LUCKIE_N = side(s, "North/Luckie N", NAVE_LUCKIE_N_LANES, NAVE_LUCKIE_N_ARR_DIST, 0,AUTO_VEHICLES)
 
 NAVE_LUCKIE_E_DEP_DISTS = [[.5, .5, 0], [0, .5, 1]]
 NAVE_LUCKIE_E_LANES = [lane(NAVE_LUCKIE_E_DEP_DISTS[0],AUTO_VEHICLES), lane(NAVE_LUCKIE_E_DEP_DISTS[1],AUTO_VEHICLES)]
-NAVE_LUCKIE_E_ARR_DIST = [.5, .5]
+NAVE_LUCKIE_E_ARR_DIST = [5, 1, [.5, .5]]
 NAVE_LUCKIE_E = side(s, "North/Luckie E", NAVE_LUCKIE_E_LANES, NAVE_LUCKIE_E_ARR_DIST, 1,AUTO_VEHICLES)
 
 NAVE_LUCKIE_S_DEP_DISTS = [[1, 0, 0], [0, 1, 0], [0, 0, 1]]
 NAVE_LUCKIE_S_LANES = [lane(NAVE_LUCKIE_S_DEP_DISTS[0],AUTO_VEHICLES), lane(NAVE_LUCKIE_S_DEP_DISTS[1],AUTO_VEHICLES), lane(NAVE_LUCKIE_S_DEP_DISTS[2],AUTO_VEHICLES)]
-NAVE_LUCKIE_S_ARR_DIST = [.33, .33, .33]
+NAVE_LUCKIE_S_ARR_DIST = [16, 2, [.33, .33, .33]]
 NAVE_LUCKIE_S = side(s, "North/Luckie S", NAVE_LUCKIE_S_LANES, NAVE_LUCKIE_S_ARR_DIST, 2,AUTO_VEHICLES)
 
 NAVE_LUCKIE_W_DEP_DISTS = [[1, 0, 0], [0, 1, 0], [0, .5, 1]]
 NAVE_LUCKIE_W_LANES = [lane(NAVE_LUCKIE_W_DEP_DISTS[0],AUTO_VEHICLES), lane(NAVE_LUCKIE_W_DEP_DISTS[1],AUTO_VEHICLES), lane(NAVE_LUCKIE_W_DEP_DISTS[2],AUTO_VEHICLES)]
-NAVE_LUCKIE_W_ARR_DIST = [.33, .33, .33]
+NAVE_LUCKIE_W_ARR_DIST = [13, 2, [.33, .33, .33]]
 NAVE_LUCKIE_W = side(s, "North/Luckie W", NAVE_LUCKIE_W_LANES, NAVE_LUCKIE_W_ARR_DIST, 3,AUTO_VEHICLES)
 
 NAVE_LUCKIE_PHASES = [phase([NAVE_LUCKIE_S],[[0,1,2]],30), #luckie green and arrow
@@ -81,17 +82,17 @@ NAVE_LUCKIE_PHASES = [phase([NAVE_LUCKIE_S],[[0,1,2]],30), #luckie green and arr
 #####################################################################
 OFFRAMP_249_DEP_DISTS = [[1,0,0],[0.5,0,1]]
 OFFRAMP_249_LANES = [lane(OFFRAMP_249_DEP_DISTS[0],AUTO_VEHICLES), lane(OFFRAMP_249_DEP_DISTS[1],AUTO_VEHICLES)]
-OFFRAMP_249_ARR_DIST = [0.5,0.5]
+OFFRAMP_249_ARR_DIST = [6, 1, [0.5,0.5]]
 OFFRAMP_249 = side(s, "Offramp 249", OFFRAMP_249_LANES, OFFRAMP_249_ARR_DIST, 0,AUTO_VEHICLES)
 
 OFFRAMP_WEST_DEP_DIST=[[0,1,0], [0,1,0]]
 OFFRAMP_WEST_LANES = [lane(OFFRAMP_WEST_DEP_DIST[0],AUTO_VEHICLES), lane(OFFRAMP_WEST_DEP_DIST[1],AUTO_VEHICLES)]
-OFFRAMP_WEST_ARR_DIST = [0.5,0.5]
+OFFRAMP_WEST_ARR_DIST = [13, 2, [0.5,0.5]]
 OFFRAMP_WEST = side(s, "Offramp West", OFFRAMP_WEST_LANES, OFFRAMP_WEST_ARR_DIST, 1,AUTO_VEHICLES)
 
 OFFRAMP_EAST_DEP_DIST=[[0,1,0], [0,1,0]]
 OFFRAMP_EAST_LANES = [lane(OFFRAMP_EAST_DEP_DIST[0],AUTO_VEHICLES), lane(OFFRAMP_EAST_DEP_DIST[1],AUTO_VEHICLES)]
-OFFRAMP_EAST_ARR_DIST = [0.5,0.5]
+OFFRAMP_EAST_ARR_DIST = [16, 2, [0.5,0.5]]
 OFFRAMP_EAST = side(s, "Offramp East", OFFRAMP_EAST_LANES, OFFRAMP_EAST_ARR_DIST, 2,AUTO_VEHICLES)
 
 OFFRAMP_PHASES = [phase([OFFRAMP_WEST, OFFRAMP_EAST],[[0,1], [0,1]], 30), #Nave e and Nave w green light
@@ -112,6 +113,15 @@ class Simulation():
         s.enter(60, 1, lambda: offramp.cycles(s))
         s.run()
         
+def auto_arrivals(s, intersections):
+    t = 0
+    for intersection in intersections:
+        for side in intersection.sides:
+            if side.on_boundary:
+                s.enter(t, 1, side.arrival, [int(np.random.normal(side.arrival_distribution[0], side.arrival_distribution[1]))])
+                t += 1
+    s.enter(60, 1, lambda: auto_arrivals(s, intersections))
+    
 if __name__ == '__main__':
     
     nave_luckie = intersection(s, "North/Luckie", [NAVE_LUCKIE_N, NAVE_LUCKIE_E, NAVE_LUCKIE_S, NAVE_LUCKIE_W], NAVE_LUCKIE_PHASES)
@@ -131,13 +141,22 @@ if __name__ == '__main__':
     offramp.sides[1].set_dests([None, nave_techwood.sides[1], None])
     offramp.sides[2].set_dests([None, None, None])
     
-    for side in nave_luckie.sides:
-        s.enter(0, 1, side.arrival, [side.nave_luckie_dist()])
+    intersections = [nave_luckie, nave_techwood, offramp]
+    
+    for intersection in intersections:
+        for side in intersection.sides:
+            print("{} dist[2]: {}".format(side.name, side.arrival_distribution[2]))
+    
+    auto_arrivals(s, intersections)
+    #for side in nave_luckie.sides:
+    #    s.enter(0, 1, side.arrival, [side.nave_luckie_dist()])
     s.enter(5, 1, lambda: nave_luckie.cycle())
-    for side in nave_techwood.sides:
-        s.enter(1, 1, side.arrival, [side.nave_techwood_dist()])
+    #for side in nave_techwood.sides:
+    #    s.enter(1, 1, side.arrival, [side.nave_techwood_dist()])
     s.enter(10, 1, lambda: nave_techwood.cycle())
-    for side in offramp.sides:
-        s.enter(0,1,side.arrival,[side.offramp_dist()])
+    #for side in offramp.sides:
+    #    s.enter(0,1,side.arrival,[side.offramp_dist()])
     s.enter(15, 1, lambda: offramp.cycle())
     s.run()
+    
+    

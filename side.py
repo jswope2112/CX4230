@@ -11,7 +11,7 @@ offramp_output = {"Offramp West": 0, "Offramp East": 0, "Offramp 249": 0}
 #Represents one side of an intersection
 class side():
 
-    def __init__(self, name, lanes, arrival_distribution, counter, auto_vehicles = False):
+    def __init__(self, name, lanes, arrival_distribution, counter, auto_vehicles):
         self.name = name
         #self.intersection = intersection # Points to the intersection this side is a part of (CURRENTLY NO LONGER NEEDED)
         self.lanes = lanes
@@ -38,17 +38,7 @@ class side():
             print("{} cars departed from {} ({} l / {} s / {} r). Queue is now {}".format(l+s+r, self.name, l, s, r, self.queue_to_string()))
             
         self.throughput += l+s+r
-        '''
-        if self.name[0] == 'O':
-            offramp_output[self.name] = offramp_output[self.name] + l + s + r
-            #print("output of {} is {}".format(self.name[:7], sum(offramp_output.values())))
-        elif self.name[6] == 'T':
-            nave_techwood_output[self.name] = nave_techwood_output[self.name] + l + s + r
-            #print("output of {} is {}".format(self.name[:14], sum(nave_techwood_output.values())))
-        else:
-            nave_luckie_output[self.name] = nave_luckie_output[self.name] + l + s + r
-            #print("output of {} is {}".format(self.name[:12], sum(nave_luckie_output.values())))
-        '''
+
         # For each departure direction, if the destination exists in our simulation, schedule the respective arrival event  
         if self.destinations[0] and l > 0:
             travel_time_calculator = tt.TravelTime(self.auto_vehicles)
@@ -87,36 +77,6 @@ class side():
             total += math.ceil(cars_incoming * changed[num])
         if (event_output):
             print("{} cars arrived at {}. Queue is now {}".format(total, self.name, self.queue_to_string()))
-
-
-    def nave_luckie_dist(self):
-        if self.counter == 0:
-            return int(np.random.normal(8, 1))
-        if self.counter == 1:
-            return int(np.random.normal(5, 1))
-        if self.counter == 2:
-            return int(np.random.normal(16, 2))
-        if self.counter == 3:
-            return int(np.random.normal(13, 2))
-
-
-    def nave_techwood_dist(self):
-        if self.counter == 0:
-            return int(np.random.normal(5, 1))
-        if self.counter == 1:
-            return int(np.random.normal(16, 2))
-        if self.counter == 2:
-            return int(np.random.normal(2, 1))
-        if self.counter == 3:
-            return int(np.random.normal(13, 2))
-
-    def offramp_dist(self):
-        if self.counter == 0:
-            return int(np.random.normal(6, 1))
-        if self.counter == 1:
-            return int(np.random.normal(13, 2))
-        if self.counter == 2:
-            return int(np.random.normal(16, 2))
         
     def set_dests(self, destinations):
         self.destinations = destinations

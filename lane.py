@@ -7,7 +7,7 @@ avg_travel_delay = 0.75
 
 class lane():
 
-    def __init__(self, departure_distribution, auto_vehicles = False):
+    def __init__(self, departure_distribution, auto_vehicles):
         self.queue = 0
         self.departure_distribution = departure_distribution
         self.auto_vehicles = auto_vehicles

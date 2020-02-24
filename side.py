@@ -19,9 +19,10 @@ class side():
         self.destinations = [None, None, None]  # Points to the destination Side after going left, straight, or right, respectively
         self.counter = counter
         self.auto_vehicles = auto_vehicles
-        self.on_boundary = True
+        self.on_boundary = True                 # TODO: make this a constructor parameter
+        self.throughput = 0
         
-    def depart(self, sched, time, lanes, tf):
+    def depart(self, sched, time, lanes, tf, event_output):
             
         # Number of cars that end up turning in each direction
         l, s, r = 0, 0, 0
@@ -33,7 +34,11 @@ class side():
             s += b
             r += c
 
-        print("{} cars departed from {} ({} l / {} s / {} r). Queue is now {}".format(l+s+r, self.name, l, s, r, self.queue_to_string()))
+        if (event_output):
+            print("{} cars departed from {} ({} l / {} s / {} r). Queue is now {}".format(l+s+r, self.name, l, s, r, self.queue_to_string()))
+            
+        self.throughput += l+s+r
+        '''
         if self.name[0] == 'O':
             offramp_output[self.name] = offramp_output[self.name] + l + s + r
             #print("output of {} is {}".format(self.name[:7], sum(offramp_output.values())))
@@ -43,22 +48,22 @@ class side():
         else:
             nave_luckie_output[self.name] = nave_luckie_output[self.name] + l + s + r
             #print("output of {} is {}".format(self.name[:12], sum(nave_luckie_output.values())))
-        
+        '''
         # For each departure direction, if the destination exists in our simulation, schedule the respective arrival event  
         if self.destinations[0] and l > 0:
             travel_time_calculator = tt.TravelTime(self.auto_vehicles)
             travel_time = travel_time_calculator.calculateTravelTime(self.name, self.destinations[0].name, l)
-            sched.enter(travel_time * tf, 1, self.destinations[0].arrival, [l])      
+            sched.enter(travel_time * tf, 1, self.destinations[0].arrival, [l, event_output])      
         if self.destinations[1] and s > 0:
             travel_time_calculator = tt.TravelTime(self.auto_vehicles)
             travel_time = travel_time_calculator.calculateTravelTime(self.name, self.destinations[1].name, s)
-            sched.enter(travel_time * tf, 1, self.destinations[1].arrival, [s])
+            sched.enter(travel_time * tf, 1, self.destinations[1].arrival, [s, event_output])
         if self.destinations[2] and r > 0:
             travel_time_calculator = tt.TravelTime(self.auto_vehicles)
             travel_time = travel_time_calculator.calculateTravelTime(self.name, self.destinations[2].name, r)
-            sched.enter(travel_time * tf, 1, self.destinations[2].arrival, [r])
+            sched.enter(travel_time * tf, 1, self.destinations[2].arrival, [r, event_output])
 
-    def arrival(self, cars_incoming):
+    def arrival(self, cars_incoming, event_output):
     
         # Decide how many incoming cars to queue in each lane
         # TODO: Make this draw stochastically from arrival_distribution
@@ -80,7 +85,8 @@ class side():
         for num, lane in enumerate(self.lanes):
             lane.queue += math.ceil(cars_incoming * changed[num])
             total += math.ceil(cars_incoming * changed[num])
-        print("{} cars arrived at {}. Queue is now {}".format(total, self.name, self.queue_to_string()))
+        if (event_output):
+            print("{} cars arrived at {}. Queue is now {}".format(total, self.name, self.queue_to_string()))
 
 
     def nave_luckie_dist(self):

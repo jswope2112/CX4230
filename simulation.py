@@ -30,19 +30,19 @@ class Simulation():
         #####################################################################    
         NAVE_LUCKIE_N_DEP_DISTS = [[1, 0, 0], [0, .5, 1]]
         NAVE_LUCKIE_N_LANES = [lane(NAVE_LUCKIE_N_DEP_DISTS[0],self.smart_cars), lane(NAVE_LUCKIE_N_DEP_DISTS[1],self.smart_cars)]
-        NAVE_LUCKIE_N_ARR_DIST = [8, 1, [.5, .5]]
+        NAVE_LUCKIE_N_ARR_DIST = [4, 1, [.5, .5]]
 
-        NAVE_LUCKIE_E_DEP_DISTS = [[0, 1, 0], [0, .6, 1]]
+        NAVE_LUCKIE_E_DEP_DISTS = [[0, 1, 0], [0, .9, 1]]
         NAVE_LUCKIE_E_LANES = [lane(NAVE_LUCKIE_E_DEP_DISTS[0],self.smart_cars), lane(NAVE_LUCKIE_E_DEP_DISTS[1],self.smart_cars)]
-        NAVE_LUCKIE_E_ARR_DIST = [5, 1, [.5, .5]]
+        NAVE_LUCKIE_E_ARR_DIST = [0, 0, [.4, .6]]
 
         NAVE_LUCKIE_S_DEP_DISTS = [[1, 0, 0], [0, 1, 0], [0, 0, 1]]
         NAVE_LUCKIE_S_LANES = [lane(NAVE_LUCKIE_S_DEP_DISTS[0],self.smart_cars), lane(NAVE_LUCKIE_S_DEP_DISTS[1],self.smart_cars), lane(NAVE_LUCKIE_S_DEP_DISTS[2],self.smart_cars)]
-        NAVE_LUCKIE_S_ARR_DIST = [16, 2, [.33, .33, .33]]
+        NAVE_LUCKIE_S_ARR_DIST = [4, 1, [.33, .33, .33]]
 
-        NAVE_LUCKIE_W_DEP_DISTS = [[1, 0, 0], [0, 1, 0], [0, .8, 1]]
+        NAVE_LUCKIE_W_DEP_DISTS = [[1, 0, 0], [0, 1, 0], [0, .7, 1]]
         NAVE_LUCKIE_W_LANES = [lane(NAVE_LUCKIE_W_DEP_DISTS[0],self.smart_cars), lane(NAVE_LUCKIE_W_DEP_DISTS[1],self.smart_cars), lane(NAVE_LUCKIE_W_DEP_DISTS[2],self.smart_cars)]
-        NAVE_LUCKIE_W_ARR_DIST = [13, 2, [.1, .5, .4]]
+        NAVE_LUCKIE_W_ARR_DIST = [18, 2, [.2, .4, .4]]
         
         NAVE_LUCKIE_N = side("North/Luckie N", NAVE_LUCKIE_N_LANES, NAVE_LUCKIE_N_ARR_DIST, 0,self.smart_cars)
         NAVE_LUCKIE_E = side("North/Luckie E", NAVE_LUCKIE_E_LANES, NAVE_LUCKIE_E_ARR_DIST, 1,self.smart_cars)
@@ -62,21 +62,21 @@ class Simulation():
         #####################################################################
         # NORTH AVE / TECHWOOD COMPONENTS 
         #####################################################################
-        NAVE_TECHWOOD_N_DEP_DISTS = [[1, 0, 0], [0, .5, 1]]
+        NAVE_TECHWOOD_N_DEP_DISTS = [[1, 0, 0], [0, .7, 1]]
         NAVE_TECHWOOD_N_LANES = [lane(NAVE_TECHWOOD_N_DEP_DISTS[0],self.smart_cars), lane(NAVE_TECHWOOD_N_DEP_DISTS[1],self.smart_cars)]
         NAVE_TECHWOOD_N_ARR_DIST = [5, 1, [.5, .5]]
 
-        NAVE_TECHWOOD_E_DEP_DISTS = [[1, 0, 0], [0, 1, 0], [0, .85, 1]]
+        NAVE_TECHWOOD_E_DEP_DISTS = [[1, 0, 0], [0, 1, 0], [0, .8, 1]]
         NAVE_TECHWOOD_E_LANES = [lane(NAVE_TECHWOOD_E_DEP_DISTS[0],self.smart_cars), lane(NAVE_TECHWOOD_E_DEP_DISTS[1],self.smart_cars), lane(NAVE_TECHWOOD_E_DEP_DISTS[2],self.smart_cars)]
-        NAVE_TECHWOOD_E_ARR_DIST = [16, 2, [.1, .5, .4]]
+        NAVE_TECHWOOD_E_ARR_DIST = [0, 0, [.2, .4, .4]]
 
         NAVE_TECHWOOD_S_DEP_DISTS = [[1, 0, 0], [0, 1, 0], [0, 0, 1]]
         NAVE_TECHWOOD_S_LANES = [lane(NAVE_TECHWOOD_S_DEP_DISTS[0], self.smart_cars), lane(NAVE_TECHWOOD_S_DEP_DISTS[1],self.smart_cars), lane(NAVE_TECHWOOD_S_DEP_DISTS[2],self.smart_cars)]
         NAVE_TECHWOOD_S_ARR_DIST = [2, 1, [.3, .2, .5]]
 
-        NAVE_TECHWOOD_W_DEP_DISTS = [[1, 0, 0], [0, 1, 0], [0, .9, 1]]
+        NAVE_TECHWOOD_W_DEP_DISTS = [[1, 0, 0], [0, 1, 0], [0, .7, 1]]
         NAVE_TECHWOOD_W_LANES = [lane(NAVE_TECHWOOD_W_DEP_DISTS[0],self.smart_cars), lane(NAVE_TECHWOOD_W_DEP_DISTS[1],self.smart_cars), lane(NAVE_TECHWOOD_W_DEP_DISTS[2],self.smart_cars)]
-        NAVE_TECHWOOD_W_ARR_DIST = [13, 2, [.1, .5, .4]] 
+        NAVE_TECHWOOD_W_ARR_DIST = [0, 0, [.2, .4, .4]] 
         
         NAVE_TECHWOOD_N = side("North/Techwood N", NAVE_TECHWOOD_N_LANES, NAVE_TECHWOOD_N_ARR_DIST, 0, self.smart_cars)
         NAVE_TECHWOOD_E = side("North/Techwood E", NAVE_TECHWOOD_E_LANES, NAVE_TECHWOOD_E_ARR_DIST, 1, self.smart_cars)
@@ -104,7 +104,7 @@ class Simulation():
 
         OFFRAMP_WEST_DEP_DIST=[[0,1,0], [0,1,0]]
         OFFRAMP_WEST_LANES = [lane(OFFRAMP_WEST_DEP_DIST[0],self.smart_cars), lane(OFFRAMP_WEST_DEP_DIST[1],self.smart_cars)]
-        OFFRAMP_WEST_ARR_DIST = [13, 2, [0.5,0.5]]
+        OFFRAMP_WEST_ARR_DIST = [0, 0, [0.5,0.5]]
 
         OFFRAMP_EAST_DEP_DIST=[[0,1,0], [0,1,0]]
         OFFRAMP_EAST_LANES = [lane(OFFRAMP_EAST_DEP_DIST[0],self.smart_cars), lane(OFFRAMP_EAST_DEP_DIST[1],self.smart_cars)]
@@ -217,7 +217,7 @@ def run_tests(num, smart_lights, smart_cars, verbose):
         
 if __name__ == '__main__':
 
-    #run_sim(.001, False, True)
+    # run_sim(.001, False, True)
     run_tests(10, False, False, False)
     #run_tests(10, True, False, False)
     #run_tests(10, False, True, False)

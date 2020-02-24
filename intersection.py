@@ -8,15 +8,19 @@ class intersection():
         self.cycle_length = 0
         for phase in phases:
             self.cycle_length += phase.length
+            
+        self.cycle_counter = 0
         
-    def cycle(self):
+    def cycle(self, tf):
         
         t = 0
         for phase in self.phases:
             # A phase consists of up to two sides. This inner loop schedules the departure events for both at the same time
             for i in range(0, len(phase.sides)):
-                self.sched.enter(t+phase.length, 1, phase.sides[i].depart, (phase.length, phase.lanes[i]))
-
+                if self.cycle_counter * self.cycle_length + t + phase.length < 3600:
+                    self.sched.enter((t+phase.length) * tf, 1, phase.sides[i].depart, [self.sched, phase.length, phase.lanes[i], tf])
             t += phase.length
-        
-        self.sched.enter(self.cycle_length, 1, self.cycle)
+            
+        self.cycle_counter += 1
+        if self.cycle_counter * self.cycle_length + self.cycle_length < 3600:
+            self.sched.enter(self.cycle_length * tf, 1, self.cycle, [tf])

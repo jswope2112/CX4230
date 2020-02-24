@@ -11,8 +11,7 @@ offramp_output = {"Offramp West": 0, "Offramp East": 0, "Offramp 249": 0}
 #Represents one side of an intersection
 class side():
 
-    def __init__(self, sched, name, lanes, arrival_distribution, counter, auto_vehicles = False):
-        self.sched = sched
+    def __init__(self, name, lanes, arrival_distribution, counter, auto_vehicles = False):
         self.name = name
         #self.intersection = intersection # Points to the intersection this side is a part of (CURRENTLY NO LONGER NEEDED)
         self.lanes = lanes
@@ -22,7 +21,7 @@ class side():
         self.auto_vehicles = auto_vehicles
         self.on_boundary = True
         
-    def depart(self, time, lanes):
+    def depart(self, sched, time, lanes, tf):
             
         # Number of cars that end up turning in each direction
         l, s, r = 0, 0, 0
@@ -37,28 +36,27 @@ class side():
         print("{} cars departed from {} ({} l / {} s / {} r). Queue is now {}".format(l+s+r, self.name, l, s, r, self.queue_to_string()))
         if self.name[0] == 'O':
             offramp_output[self.name] = offramp_output[self.name] + l + s + r
-            print("output of {} is {}".format(self.name[:7], sum(offramp_output.values())))
+            #print("output of {} is {}".format(self.name[:7], sum(offramp_output.values())))
         elif self.name[6] == 'T':
             nave_techwood_output[self.name] = nave_techwood_output[self.name] + l + s + r
-            print("output of {} is {}".format(self.name[:14], sum(nave_techwood_output.values())))
+            #print("output of {} is {}".format(self.name[:14], sum(nave_techwood_output.values())))
         else:
             nave_luckie_output[self.name] = nave_luckie_output[self.name] + l + s + r
-            print("output of {} is {}".format(self.name[:12], sum(nave_luckie_output.values())))
-        
+            #print("output of {} is {}".format(self.name[:12], sum(nave_luckie_output.values())))
         
         # For each departure direction, if the destination exists in our simulation, schedule the respective arrival event  
         if self.destinations[0] and l > 0:
             travel_time_calculator = tt.TravelTime(self.auto_vehicles)
             travel_time = travel_time_calculator.calculateTravelTime(self.name, self.destinations[0].name, l)
-            self.sched.enter(travel_time, 1, self.destinations[0].arrival, [l])      
+            sched.enter(travel_time * tf, 1, self.destinations[0].arrival, [l])      
         if self.destinations[1] and s > 0:
             travel_time_calculator = tt.TravelTime(self.auto_vehicles)
             travel_time = travel_time_calculator.calculateTravelTime(self.name, self.destinations[1].name, s)
-            self.sched.enter(travel_time, 1, self.destinations[1].arrival, [s])
+            sched.enter(travel_time * tf, 1, self.destinations[1].arrival, [s])
         if self.destinations[2] and r > 0:
             travel_time_calculator = tt.TravelTime(self.auto_vehicles)
             travel_time = travel_time_calculator.calculateTravelTime(self.name, self.destinations[2].name, r)
-            self.sched.enter(travel_time, 1, self.destinations[2].arrival, [r])
+            sched.enter(travel_time * tf, 1, self.destinations[2].arrival, [r])
 
     def arrival(self, cars_incoming):
     

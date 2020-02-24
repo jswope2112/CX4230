@@ -57,7 +57,7 @@ class Simulation():
             #nave west green and arrow
             phase([NAVE_LUCKIE_W],[[0,1,2]],10),
             #nave west green and nave east green
-            phase([NAVE_LUCKIE_W,NAVE_LUCKIE_E],[[1,2],[0,1]],55)]
+            phase([NAVE_LUCKIE_W,NAVE_LUCKIE_E],[[1,2],[0,1]],65)]
             
         #####################################################################
         # NORTH AVE / TECHWOOD COMPONENTS 
@@ -91,7 +91,7 @@ class Simulation():
             #Nave W green and arrow
             phase([NAVE_TECHWOOD_W],[[0,1,2]],10),
             #Nav W and Nave E Green
-            phase([NAVE_TECHWOOD_W,NAVE_TECHWOOD_E],[[1,2],[1,2]],80),
+            phase([NAVE_TECHWOOD_W,NAVE_TECHWOOD_E],[[1,2],[1,2]],60),
             #Nave E green and arrow 
             phase([NAVE_TECHWOOD_E],[[0,1,2]],10)]
             
@@ -146,10 +146,16 @@ class Simulation():
         
         self.auto_arrivals()
         
-        t = 0
+        # schedule all intersection cycle events (since their duration is fixed and known)
+        ct = time.time()
+        end = ct + SIM_TIME * self.time_factor
+        print("vt: {}".format(ct))
+        print("end: {}".format(end))
         for intersection in self.intersections:
-            self.s.enter(t * self.time_factor, 1, intersection.cycle, [self.time_factor, self.event_output])
-            t += 5
+            t = ct
+            while t < end:
+                self.s.enterabs(t, 1, intersection.cycle, [self.time_factor, self.event_output])
+                t += intersection.cycle_length * self.time_factor
         self.s.run()
         
     def auto_arrivals(self):
@@ -211,8 +217,8 @@ def run_tests(num, smart_lights, smart_cars, verbose):
         
 if __name__ == '__main__':
 
-    run_sim(.0001, False, True)
-    #run_tests(10, False, False, False)
+    #run_sim(.001, False, True)
+    run_tests(10, False, False, False)
     #run_tests(10, True, False, False)
     #run_tests(10, False, True, False)
     #run_tests(10, True, True, False)

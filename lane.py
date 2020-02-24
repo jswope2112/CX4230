@@ -3,6 +3,7 @@ import numpy as np
 avg_reaction_delay = 0.5
 std_reaction_delay = 0.25
 avg_travel_delay = 0.75
+std_travel_delay = 0.25
 
 
 class lane():
@@ -36,15 +37,15 @@ class lane():
             #this assumes people fill in lanes about evenly
             #TODO: obviously cars in the back should have a higher multiplicative effect
             if decision == "l":
-                travel_delay = avg_travel_delay * l
+                travel_delay = np.random.normal(avg_travel_delay, std_travel_delay)
                 l += 1
                 time += reaction_delay + travel_delay
             elif decision == "s":
-                travel_delay = avg_travel_delay * s
+                travel_delay = np.random.normal(avg_travel_delay, std_travel_delay)
                 s += 1
                 time += reaction_delay + travel_delay
             else:
-                travel_delay = avg_travel_delay * r
+                travel_delay = np.random.normal(avg_travel_delay, std_travel_delay)
                 r += 1
                 time += reaction_delay + travel_delay
             

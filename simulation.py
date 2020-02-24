@@ -32,7 +32,7 @@ class Simulation():
         NAVE_LUCKIE_N_LANES = [lane(NAVE_LUCKIE_N_DEP_DISTS[0],self.smart_cars), lane(NAVE_LUCKIE_N_DEP_DISTS[1],self.smart_cars)]
         NAVE_LUCKIE_N_ARR_DIST = [8, 1, [.5, .5]]
 
-        NAVE_LUCKIE_E_DEP_DISTS = [[.4, 1, 0], [0, .6, 1]]
+        NAVE_LUCKIE_E_DEP_DISTS = [[0, 1, 0], [0, .6, 1]]
         NAVE_LUCKIE_E_LANES = [lane(NAVE_LUCKIE_E_DEP_DISTS[0],self.smart_cars), lane(NAVE_LUCKIE_E_DEP_DISTS[1],self.smart_cars)]
         NAVE_LUCKIE_E_ARR_DIST = [5, 1, [.5, .5]]
 
@@ -57,7 +57,7 @@ class Simulation():
             #nave west green and arrow
             phase([NAVE_LUCKIE_W],[[0,1,2]],10),
             #nave west green and nave east green
-            phase([NAVE_LUCKIE_W,NAVE_LUCKIE_E],[[1,2],[1]],40)]
+            phase([NAVE_LUCKIE_W,NAVE_LUCKIE_E],[[1,2],[0,1]],55)]
             
         #####################################################################
         # NORTH AVE / TECHWOOD COMPONENTS 
@@ -68,7 +68,7 @@ class Simulation():
 
         NAVE_TECHWOOD_E_DEP_DISTS = [[1, 0, 0], [0, 1, 0], [0, .85, 1]]
         NAVE_TECHWOOD_E_LANES = [lane(NAVE_TECHWOOD_E_DEP_DISTS[0],self.smart_cars), lane(NAVE_TECHWOOD_E_DEP_DISTS[1],self.smart_cars), lane(NAVE_TECHWOOD_E_DEP_DISTS[2],self.smart_cars)]
-        NAVE_TECHWOOD_E_ARR_DIST = [16, 2, [.1, .4, .5]]
+        NAVE_TECHWOOD_E_ARR_DIST = [16, 2, [.1, .5, .4]]
 
         NAVE_TECHWOOD_S_DEP_DISTS = [[1, 0, 0], [0, 1, 0], [0, 0, 1]]
         NAVE_TECHWOOD_S_LANES = [lane(NAVE_TECHWOOD_S_DEP_DISTS[0], self.smart_cars), lane(NAVE_TECHWOOD_S_DEP_DISTS[1],self.smart_cars), lane(NAVE_TECHWOOD_S_DEP_DISTS[2],self.smart_cars)]
@@ -91,7 +91,7 @@ class Simulation():
             #Nave W green and arrow
             phase([NAVE_TECHWOOD_W],[[0,1,2]],10),
             #Nav W and Nave E Green
-            phase([NAVE_TECHWOOD_W,NAVE_TECHWOOD_E],[[1,2],[1]],40),
+            phase([NAVE_TECHWOOD_W,NAVE_TECHWOOD_E],[[1,2],[1,2]],80),
             #Nave E green and arrow 
             phase([NAVE_TECHWOOD_E],[[0,1,2]],10)]
             
@@ -211,8 +211,8 @@ def run_tests(num, smart_lights, smart_cars, verbose):
         
 if __name__ == '__main__':
 
-    #run_sim(.0001, False, True)
-    run_tests(10, False, False, False)
-    run_tests(10, True, False, False)
-    run_tests(10, False, True, False)
-    run_tests(10, True, True, False)
+    run_sim(.0001, False, True)
+    #run_tests(10, False, False, False)
+    #run_tests(10, True, False, False)
+    #run_tests(10, False, True, False)
+    #run_tests(10, True, True, False)

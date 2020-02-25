@@ -1,11 +1,11 @@
 # CX4230
 CX4230 Simulation Project
 
-Once loaded in the PACE cluster run
-{module load python/3.6}
+Once loaded in the PACE cluster run <br>
+{module load python/3.6} <br>
 
-To return the default simulation results (10 runs each of each configuration), run:
-{python3 simulation.py}
+To return the default simulation results (10 runs each of each configuration), run: <br>
+{python3 simulation.py} <br>
 This will print the configurations of:
 smart_lights = False, smart_cars = False
 smart_lights = True, smart_cars = False
@@ -19,11 +19,11 @@ where smart_lights is a boolean
 where smart_cars is a boolean
 
 Examples:
-Very fast simulation with smart_lights = True and smart_cars = True [Recommended]
-{python3 -c 'from simulation import *; run_sim(0.001, True, True)'}
+Very fast simulation with smart_lights = True and smart_cars = True [Recommended] <br>
+{python3 -c 'from simulation import *; run_sim(0.001, True, True)'} <br>
 
-Fast simulation with smart_lights = False and smart_cars = True
-{python3 -c 'from simulation import *; run_sim(0.01, False, True)'}
+Fast simulation with smart_lights = False and smart_cars = True <br>
+{python3 -c 'from simulation import *; run_sim(0.01, False, True)'} <br>
 
 Lastly, to just run the tests and get metrics:
 run_tests(num, smart_lights, smart_cars, verbose)
@@ -32,5 +32,5 @@ where smart_lights is a boolean
 where smart_cars is a boolean
 where verbose is a boolean for more verbose printing
 
-Examples:
-{python3 -c 'from simulation import *; run_tests(10, False, True, False)'}
+Examples: <br>
+{python3 -c 'from simulation import *; run_tests(10, False, True, False)'} <br>

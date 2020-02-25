@@ -55,7 +55,6 @@ class side():
     def arrival(self, cars_incoming, event_output):
     
         # Decide how many incoming cars to queue in each lane
-        # TODO: Make this draw stochastically from arrival_distribution
 
         #new array to stochastically alter arrival distribution
         changed = [0,0,0] # setting to self.arrival_distribution creates a shallow copy and changes it permanently

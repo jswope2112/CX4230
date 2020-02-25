@@ -30,12 +30,6 @@ class lane():
                 reaction_delay = np.random.normal(avg_reaction_delay, std_reaction_delay)
             decision = self.get_car_decision()
             
-            #our calculation of travel_delay varies per lane
-            #currently calculated by how many cars are before a vehicle * a factor
-            #i.e. on a two straight lane road, the third (overall) car is only behind
-            #one car, the same goes for the fourth.
-            #this assumes people fill in lanes about evenly
-            #TODO: obviously cars in the back should have a higher multiplicative effect
             if decision == "l":
                 travel_delay = np.random.normal(avg_travel_delay, std_travel_delay)
                 l += 1
@@ -59,7 +53,6 @@ class lane():
     def get_car_decision(self):
         
         # generate a uniform random variable to determine which way the car is going
-        # TODO: base this off real data from the intersection (departure_distribution)
         random_num = np.random.uniform()
 
         for idx, val in enumerate(self.departure_distribution):

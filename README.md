@@ -20,10 +20,10 @@ where smart_cars is a boolean <br>
 
 Examples: <br>
 Very fast simulation with smart_lights = True and smart_cars = True **[Recommended]** <br>
-**{python3 -c 'from simulation import *; run_sim(0.001, True, True)'}** <br>
+****{python3 -c 'from simulation import *; run_sim(0.001, True, True)'}**** <br>
 
 Fast simulation with smart_lights = False and smart_cars = True <br>
-**{python3 -c 'from simulation import *; run_sim(0.01, False, True)'}** <br>
+****{python3 -c 'from simulation import *; run_sim(0.01, False, True)'}**** <br>
 
 Lastly, to just run the tests and get metrics: <br>
 run_tests(num, smart_lights, smart_cars, verbose) <br>
@@ -33,4 +33,4 @@ where smart_cars is a boolean <br>
 where verbose is a boolean for more verbose printing <br>
 
 Examples: <br>
-**{python3 -c 'from simulation import *; run_tests(10, False, True, False)'}** <br>
+****{python3 -c 'from simulation import *; run_tests(10, False, True, False)'}**** <br>

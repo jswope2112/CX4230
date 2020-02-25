@@ -20,11 +20,3 @@ class intersection():
                 if self.cycle_counter * self.cycle_length + t < 3600:
                     self.sched.enter(t * tf, 1, phase.sides[i].depart, [self.sched, phase.length, phase.lanes[i], tf, event_output])
             t += phase.length
-        '''    
-        self.cycle_counter += 1
-        if self.cycle_counter * self.cycle_length < 3600:
-            print("REPEATING {} CYCLE, {}".format(self.name, self.cycle_counter * self.cycle_length))
-            print("CYCLE LENGTH: {}, CYCLE_COUNTER: {}".format(self.cycle_length, self.cycle_counter))
-            print(self.sched.queue)
-            self.sched.enter(self.cycle_length * tf, 1, self.cycle, [tf, event_output])
-        '''

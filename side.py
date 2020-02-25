@@ -11,15 +11,14 @@ offramp_output = {"Offramp West": 0, "Offramp East": 0, "Offramp 249": 0}
 #Represents one side of an intersection
 class side():
 
-    def __init__(self, name, lanes, arrival_distribution, counter, auto_vehicles):
+    def __init__(self, name, lanes, arrival_distribution, on_boundary, auto_vehicles):
         self.name = name
         #self.intersection = intersection # Points to the intersection this side is a part of (CURRENTLY NO LONGER NEEDED)
         self.lanes = lanes
         self.arrival_distribution = arrival_distribution
         self.destinations = [None, None, None]  # Points to the destination Side after going left, straight, or right, respectively
-        self.counter = counter
         self.auto_vehicles = auto_vehicles
-        self.on_boundary = True                 # TODO: make this a constructor parameter
+        self.on_boundary = on_boundary                
         self.throughput = 0
         
     def depart(self, sched, time, lanes, tf, event_output):

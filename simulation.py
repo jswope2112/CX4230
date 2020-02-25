@@ -48,16 +48,27 @@ class Simulation():
         NAVE_LUCKIE_E = side("North/Luckie E", NAVE_LUCKIE_E_LANES, NAVE_LUCKIE_E_ARR_DIST, 1,self.smart_cars)
         NAVE_LUCKIE_S = side("North/Luckie S", NAVE_LUCKIE_S_LANES, NAVE_LUCKIE_S_ARR_DIST, 2,self.smart_cars)
         NAVE_LUCKIE_W = side("North/Luckie W", NAVE_LUCKIE_W_LANES, NAVE_LUCKIE_W_ARR_DIST, 3,self.smart_cars)
-        
-        NAVE_LUCKIE_PHASES = [phase([NAVE_LUCKIE_S],[[0,1,2]],15), #luckie green and arrow
-            #luckie green and tech pkwy green
-            phase([NAVE_LUCKIE_S,NAVE_LUCKIE_N],[[1,2],[1]],15),
-            #tech pkwy green and arrow
-            phase([NAVE_LUCKIE_N],[[0,1]],15),
-            #nave west green and arrow
-            phase([NAVE_LUCKIE_W],[[0,1,2]],10),
-            #nave west green and nave east green
-            phase([NAVE_LUCKIE_W,NAVE_LUCKIE_E],[[1,2],[0,1]],65)]
+
+        if smart_lights == True:
+            NAVE_LUCKIE_PHASES = [phase([NAVE_LUCKIE_S],[[0,1,2]],20), #luckie green and arrow
+                        #luckie green and tech pkwy green
+                        phase([NAVE_LUCKIE_S,NAVE_LUCKIE_N],[[1,2],[1]],25),
+                        #tech pkwy green and arrow
+                        phase([NAVE_LUCKIE_N],[[0,1]],20),
+                        #nave west green and arrow
+                        phase([NAVE_LUCKIE_W],[[0,1,2]],15),
+                        #nave west green and nave east green
+                        phase([NAVE_LUCKIE_W,NAVE_LUCKIE_E],[[1,2],[0,1]],75)]
+        else:
+            NAVE_LUCKIE_PHASES = [phase([NAVE_LUCKIE_S],[[0,1,2]],15), #luckie green and arrow
+                        #luckie green and tech pkwy green
+                        phase([NAVE_LUCKIE_S,NAVE_LUCKIE_N],[[1,2],[1]],15),
+                        #tech pkwy green and arrow
+                        phase([NAVE_LUCKIE_N],[[0,1]],15),
+                        #nave west green and arrow
+                        phase([NAVE_LUCKIE_W],[[0,1,2]],10),
+                        #nave west green and nave east green
+                        phase([NAVE_LUCKIE_W,NAVE_LUCKIE_E],[[1,2],[0,1]],65)]
             
         #####################################################################
         # NORTH AVE / TECHWOOD COMPONENTS 
@@ -82,18 +93,31 @@ class Simulation():
         NAVE_TECHWOOD_E = side("North/Techwood E", NAVE_TECHWOOD_E_LANES, NAVE_TECHWOOD_E_ARR_DIST, 1, self.smart_cars)
         NAVE_TECHWOOD_S = side("North/Techwood S", NAVE_TECHWOOD_S_LANES, NAVE_TECHWOOD_S_ARR_DIST, 2, self.smart_cars)
         NAVE_TECHWOOD_W = side("North/Techwood W", NAVE_TECHWOOD_W_LANES, NAVE_TECHWOOD_W_ARR_DIST, 3, self.smart_cars)
-        
-        NAVE_TECHWOOD_PHASES = [phase([NAVE_TECHWOOD_S],[[0,1,2]],10), #techwood South arrow and green
-            #techwood S and Techwood N green
-            phase([NAVE_TECHWOOD_S,NAVE_TECHWOOD_N],[[1,2],[1]],20),
-            #techwood N green and arrow
-            phase([NAVE_TECHWOOD_N],[[0,1]],10),
-            #Nave W green and arrow
-            phase([NAVE_TECHWOOD_W],[[0,1,2]],10),
-            #Nav W and Nave E Green
-            phase([NAVE_TECHWOOD_W,NAVE_TECHWOOD_E],[[1,2],[1,2]],60),
-            #Nave E green and arrow 
-            phase([NAVE_TECHWOOD_E],[[0,1,2]],10)]
+
+        if smart_lights == True:
+            NAVE_TECHWOOD_PHASES = [phase([NAVE_TECHWOOD_S],[[0,1,2]],15), #techwood South arrow and green
+                         #techwood S and Techwood N green
+                         phase([NAVE_TECHWOOD_S,NAVE_TECHWOOD_N],[[1,2],[1]],30),
+                         #techwood N green and arrow
+                         phase([NAVE_TECHWOOD_N],[[0,1]],5),
+                         #Nave W green and arrow
+                         phase([NAVE_TECHWOOD_W],[[0,1,2]],5),
+                         #Nav W and Nave E Green
+                         phase([NAVE_TECHWOOD_W,NAVE_TECHWOOD_E],[[1,2],[1,2]],70),
+                         #Nave E green and arrow
+                         phase([NAVE_TECHWOOD_E],[[0,1,2]],5)]
+        else:
+            NAVE_TECHWOOD_PHASES = [phase([NAVE_TECHWOOD_S],[[0,1,2]],10), #techwood South arrow and green
+                         #techwood S and Techwood N green
+                         phase([NAVE_TECHWOOD_S,NAVE_TECHWOOD_N],[[1,2],[1]],20),
+                         #techwood N green and arrow
+                         phase([NAVE_TECHWOOD_N],[[0,1]],10),
+                         #Nave W green and arrow
+                         phase([NAVE_TECHWOOD_W],[[0,1,2]],10),
+                         #Nav W and Nave E Green
+                         phase([NAVE_TECHWOOD_W,NAVE_TECHWOOD_E],[[1,2],[1,2]],60),
+                         #Nave E green and arrow
+                         phase([NAVE_TECHWOOD_E],[[0,1,2]],10)]
             
         #####################################################################    
         # OFFRAMP COMPONENTS 
@@ -114,9 +138,14 @@ class Simulation():
         OFFRAMP_WEST = side("Offramp West", OFFRAMP_WEST_LANES, OFFRAMP_WEST_ARR_DIST, 1,self.smart_cars)
         OFFRAMP_EAST = side("Offramp East", OFFRAMP_EAST_LANES, OFFRAMP_EAST_ARR_DIST, 2,self.smart_cars)
 
-        OFFRAMP_PHASES = [phase([OFFRAMP_WEST, OFFRAMP_EAST],[[0,1], [0,1]], 40), #Nave e and Nave w green light
-            #off-ramp green lights
-            phase([OFFRAMP_249], [[0,1]],20)]
+        if smart_lights == True:
+            OFFRAMP_PHASES = [phase([OFFRAMP_WEST, OFFRAMP_EAST],[[0,1], [0,1]], 50), #Nave e and Nave w green light
+                        #off-ramp green lights
+                        phase([OFFRAMP_249], [[0,1]],15)]
+        else:
+            OFFRAMP_PHASES = [phase([OFFRAMP_WEST, OFFRAMP_EAST],[[0,1], [0,1]], 40), #Nave e and Nave w green light
+                        #off-ramp green lights
+                        phase([OFFRAMP_249], [[0,1]],20)]
                   
         #####################################################################    
         # INTERSECTION OBJECTS
@@ -219,6 +248,6 @@ if __name__ == '__main__':
 
     # run_sim(.001, False, True)
     run_tests(10, False, False, False)
-    #run_tests(10, True, False, False)
+    run_tests(10, True, False, False)
     #run_tests(10, False, True, False)
     #run_tests(10, True, True, False)

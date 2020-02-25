@@ -2,8 +2,8 @@ import numpy as np
 
 avg_reaction_delay = 2.3
 std_reaction_delay = 0.46
-avg_travel_delay = 0.75
-std_travel_delay = 0.25
+avg_travel_delay = 2
+std_travel_delay = 0.45
 
 
 class lane():

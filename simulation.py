@@ -50,13 +50,13 @@ class Simulation():
         NAVE_LUCKIE_W = side("North/Luckie W", NAVE_LUCKIE_W_LANES, NAVE_LUCKIE_W_ARR_DIST, 3,self.smart_cars)
 
         if smart_lights == True:
-            NAVE_LUCKIE_PHASES = [phase([NAVE_LUCKIE_S],[[0,1,2]],20), #luckie green and arrow
+            NAVE_LUCKIE_PHASES = [phase([NAVE_LUCKIE_S],[[0,1,2]],10), #luckie green and arrow
                         #luckie green and tech pkwy green
-                        phase([NAVE_LUCKIE_S,NAVE_LUCKIE_N],[[1,2],[1]],25),
+                        phase([NAVE_LUCKIE_S,NAVE_LUCKIE_N],[[1,2],[1]],10),
                         #tech pkwy green and arrow
-                        phase([NAVE_LUCKIE_N],[[0,1]],20),
+                        phase([NAVE_LUCKIE_N],[[0,1]],10),
                         #nave west green and arrow
-                        phase([NAVE_LUCKIE_W],[[0,1,2]],15),
+                        phase([NAVE_LUCKIE_W],[[0,1,2]],20),
                         #nave west green and nave east green
                         phase([NAVE_LUCKIE_W,NAVE_LUCKIE_E],[[1,2],[0,1]],75)]
         else:
@@ -95,17 +95,17 @@ class Simulation():
         NAVE_TECHWOOD_W = side("North/Techwood W", NAVE_TECHWOOD_W_LANES, NAVE_TECHWOOD_W_ARR_DIST, 3, self.smart_cars)
 
         if smart_lights == True:
-            NAVE_TECHWOOD_PHASES = [phase([NAVE_TECHWOOD_S],[[0,1,2]],15), #techwood South arrow and green
+            NAVE_TECHWOOD_PHASES = [phase([NAVE_TECHWOOD_S],[[0,1,2]],5), #techwood South arrow and green
                          #techwood S and Techwood N green
-                         phase([NAVE_TECHWOOD_S,NAVE_TECHWOOD_N],[[1,2],[1]],30),
+                         phase([NAVE_TECHWOOD_S,NAVE_TECHWOOD_N],[[1,2],[1]],10),
                          #techwood N green and arrow
                          phase([NAVE_TECHWOOD_N],[[0,1]],5),
                          #Nave W green and arrow
-                         phase([NAVE_TECHWOOD_W],[[0,1,2]],5),
+                         phase([NAVE_TECHWOOD_W],[[0,1,2]],15),
                          #Nav W and Nave E Green
                          phase([NAVE_TECHWOOD_W,NAVE_TECHWOOD_E],[[1,2],[1,2]],70),
                          #Nave E green and arrow
-                         phase([NAVE_TECHWOOD_E],[[0,1,2]],5)]
+                         phase([NAVE_TECHWOOD_E],[[0,1,2]],15)]
         else:
             NAVE_TECHWOOD_PHASES = [phase([NAVE_TECHWOOD_S],[[0,1,2]],10), #techwood South arrow and green
                          #techwood S and Techwood N green
@@ -139,7 +139,7 @@ class Simulation():
         OFFRAMP_EAST = side("Offramp East", OFFRAMP_EAST_LANES, OFFRAMP_EAST_ARR_DIST, 2,self.smart_cars)
 
         if smart_lights == True:
-            OFFRAMP_PHASES = [phase([OFFRAMP_WEST, OFFRAMP_EAST],[[0,1], [0,1]], 50), #Nave e and Nave w green light
+            OFFRAMP_PHASES = [phase([OFFRAMP_WEST, OFFRAMP_EAST],[[0,1], [0,1]], 60), #Nave e and Nave w green light
                         #off-ramp green lights
                         phase([OFFRAMP_249], [[0,1]],15)]
         else:
@@ -249,5 +249,5 @@ if __name__ == '__main__':
     # run_sim(.001, False, True)
     run_tests(10, False, False, False)
     run_tests(10, True, False, False)
-    #run_tests(10, False, True, False)
-    #run_tests(10, True, True, False)
+    run_tests(10, False, True, False)
+    run_tests(10, True, True, False)

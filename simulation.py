@@ -1,4 +1,4 @@
-import sched, time
+import sched, time, math
 import numpy as np
 from lane import lane
 from side import side
@@ -254,7 +254,7 @@ def run_tests(num, smart_lights, smart_cars, verbose):
     j = 0
     for intersection in sim.intersections:
             for side in intersection.sides:
-                print("{}: {} MEAN: {} STDV: {}".format(side.name, results[:,j], np.mean(results[:,j]), np.std(results[:,j])))
+                print("{}: {} MEAN: {} +/- {:.2f}".format(side.name, results[:,j], np.mean(results[:,j]), 1.96*np.std(results[:,j])/math.sqrt(10)))
                 j += 1
     
         
